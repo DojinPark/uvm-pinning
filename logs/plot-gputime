@@ -1,0 +1,60 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+from adjustText import adjust_text
+import numpy as np
+import csv
+import sys
+from pathlib import Path
+
+data = []
+
+filename = Path(sys.argv[1])
+with open(filename, 'r') as file:
+	table = csv.reader(file, delimiter='\t')
+	for row in table:
+		data.append(
+			(float(row[1]), # Data Size
+			float(row[2]),  # Memory Size
+			float(row[3])) # Execution Time
+			)
+		
+data.sort(key=lambda tup: tup[0])
+data.sort(key=lambda tup: tup[1])
+
+dsize = [d for (d, m, t) in data]
+msize = data[0][1]
+extime = [t for (d, m, t) in data]
+
+model = np.poly1d( np.polyfit(dsize, extime, 10) )
+
+
+# Figure size by inches
+w = 7
+h = 5
+fig = plt.figure().set_size_inches(w, h)
+
+plt.plot(dsize, model(dsize))
+plt.scatter(dsize, extime)
+
+oversubi = 0
+for i in range(len(dsize)):
+	if dsize[i] >= msize:
+		oversubi = i;
+		break
+
+#for i in range(oversub, len(dsize)):
+#	plt.annotate(extime[i], (dsize[i], extime[i]))
+
+annots = []
+for d, e in zip(dsize, extime):
+	annots.append( plt.text(d, e, e) )
+adjust_text(annots, arrowprops=dict(arrowstyle="-", color='b', lw=0.5))
+
+plt.axvline(dsize[oversubi], 0, 0.8, label='GPU Memory Size', color='r') 
+plt.xlabel('Data Size (GB)')
+plt.ylabel('Kernel Time (ms)')
+plt.legend()
+plt.savefig(filename.with_suffix('.png'))
+plt.show()
+

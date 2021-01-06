@@ -1,0 +1,3 @@
+Nov 26 13:59:06 djpark-lab kernel: [  308.898391] NVRM: GPU at PCI:0000:01:00: GPU-6ce27c10-ff68-7037-5273-b0032f2e2994
+Nov 26 13:59:06 djpark-lab kernel: [  308.898393] NVRM: GPU Board Serial Number: 
+Nov 26 13:59:06 djpark-lab kernel: [  308.898395] NVRM: Xid (PCI:0000:01:00): 31, pid=12452, Ch 00000028, intr 10000000. MMU Fault: ENGINE GRAPHICS GPCCLIENT_T1_0 faulted @ 0x7f18_40600000. Fault is of type FAULT_PDE ACCESS_TYPE_READ

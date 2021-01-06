@@ -1,0 +1,14 @@
+#!/bin/bash
+
+plot-bench2 addvec100 AddVector
+plot-bench2 addvec1000 AddVector
+
+plot-bench2 fdtd100 FDTD-2D
+plot-bench2 fdtd1000 FDTD-2D
+
+plot-bench2 nw100 NW
+plot-bench2 nw1000 NW
+
+plot-bench2 ra100 RA
+plot-bench2 ra1000 RA
+

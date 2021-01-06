@@ -1,0 +1,5 @@
+#!/bin/bash
+
+plot-bench4 addvec100 fdtd100 nw100 ra100 AddVector FDTD-2D NW RA addvec1000 fdtd1000 nw1000 ra1000 AddVector FDTD-2D NW RA
+
+

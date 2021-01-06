@@ -1,0 +1,115 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+from adjustText import adjust_text
+import numpy as np
+import csv
+import sys
+from pathlib import Path
+
+def read_data(filename):
+	memsize = 0
+	x = []	# data size
+	y = []	# vanilla execution time
+	y1 = []	# 12.5% pinning execution time
+	y2 = []	# 25% pinning execution time
+	y3 = [] # 50% pinning execution time
+	y4 = [] # shuffle
+	z1 = []	# y1 speedup
+	z2 = []	# y2 speedup
+	z3 = []	# y3 speedup
+	z4 = []	# y4 speedup
+	
+	file = open(filename, 'r')
+	table = csv.reader(file, delimiter='\t')
+	i = 0
+	for row in table:
+		if not row:
+			break
+		if i != 0:
+			x.append( int(row[0]) )
+			y.append( float(row[1]) )
+			y1.append( float(row[2]) )
+			y2.append( float(row[3]) )
+			y3.append( float(row[4]) )
+			y4.append( float(row[5]) )
+			z1.append( round(1 - float(row[2]) / float(row[1]), 4) *100 )
+			z2.append( round(1 - float(row[3]) / float(row[1]), 4) *100 )
+			z3.append( round(1 - float(row[4]) / float(row[1]), 4) *100 )
+			z4.append( round(1 - float(row[5]) / float(row[1]), 4) *100 )
+		else:
+			memsize = int(row[0])
+		i += 1
+	file.close()
+	return memsize, x, y, y1, y2, y3, y4, z1, z2, z3, z4
+
+def plot_extime(ax, x, y, c):
+	model = np.poly1d( np.polyfit(x, y, len(x)) )
+	ax.plot(x, model(x), color=c)
+	ax.scatter(x, y, color=c)
+
+def plot_speedup(ax, x, z, offset, c):
+	w = (x[1] - x[0])/5
+	ax.set_ylim([-20, 50])
+	ax.bar([t + w*offset for t in x], z, w, color=c)
+	
+memsize, x, y, y1, y2, y3, y4, z1, z2, z3, z4 = read_data(sys.argv[1])
+
+fig = plt.figure()
+fig.suptitle(sys.argv[2]+' ('+str(memsize)+'MB GPU memory)')
+w = 7
+h = 5.5
+fig.set_size_inches(w, h)
+gs = GridSpec(3, 2, figure=fig)
+
+ax1 = fig.add_subplot( gs[0:2,0] )
+ax2 = fig.add_subplot( gs[0:2,1] )
+ax3 = fig.add_subplot( gs[2:3,0] )
+ax4 = fig.add_subplot( gs[2:3,1] )
+
+ax1.set(ylabel='Kernel Execution Time (ms)')
+ax3.set(ylabel='Speed Up (%)')
+fig.text(0.45, 0.03, 'data size (MB)', va='center', rotation='horizontal')
+ax2.ticklabel_format(axis='y', style='sci', scilimits=(0,3))
+
+colors = ['k', (0, 0, 1, 0.3), (0, 0, 1, 0.5), (0, 0, 1, 0.7), 'r']
+
+
+sep = 4
+_x = x[0:sep]
+_y = []
+_z = []
+x_ = x[sep:]
+y_ = []
+z_ = []
+_y.append(y[0:sep])
+_y.append(y1[0:sep])
+_y.append(y2[0:sep])
+_y.append(y3[0:sep])
+_y.append(y4[0:sep])
+y_.append(y[sep:])
+y_.append(y1[sep:])
+y_.append(y2[sep:])
+y_.append(y3[sep:])
+y_.append(y4[sep:])
+_z.append(0)
+_z.append(z1[0:sep])
+_z.append(z2[0:sep])
+_z.append(z3[0:sep])
+_z.append(z4[0:sep])
+z_.append(0)
+z_.append(z1[sep:])
+z_.append(z2[sep:])
+z_.append(z3[sep:])
+z_.append(z4[sep:])
+
+for i in range(5):
+	plot_extime(ax1, _x, _y[i], colors[i])
+	plot_extime(ax2, x_, y_[i], colors[i])
+for i in range(1,5):
+	plot_speedup(ax3, _x, _z[i], i-1, colors[i])
+	plot_speedup(ax4, x_, z_[i], i-1, colors[i])
+
+# plt.show()
+plt.savefig(sys.argv[1]+'.png')

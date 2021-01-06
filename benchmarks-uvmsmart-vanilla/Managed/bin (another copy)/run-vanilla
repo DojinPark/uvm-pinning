@@ -1,0 +1,60 @@
+#!/bin/bash
+source ~/gdrive/envs/bashrc
+
+echo addvectors 16
+./addvectors 16
+logsave addvectors50%
+echo
+
+#echo addvectors 7.272727013
+#./addvectors 7.272727013
+#echo
+
+#echo addvectors 6.399999619
+#./addvectors 6.399999619
+#echo
+###########################################
+echo fdtd 36.125
+./fdtd 36.125
+logsave fdtd50%
+echo
+
+echo fdtd 16.420454979
+./fdtd 16.420454979
+logsave fdtd110%
+echo
+
+echo fdtd 14.449999809
+./fdtd 14.449999809
+logsave fdtd125%
+echo
+###########################################
+echo nw 16.25
+./nw 16.25
+logsave nw50%
+echo
+
+echo nw 7.386363029
+./nw 7.386363029
+logsave nw110%
+echo
+
+echo nw 6.5
+./nw 6.5
+logsave nw125%
+echo
+###########################################
+echo ra 24
+./ra 24
+logsave ra50%
+echo
+
+echo ra 10.909090996
+./ra 10.909090996
+logsave ra110%
+echo
+
+echo ra 9.600000381
+./ra 9.600000381
+logsave ra125%
+echo

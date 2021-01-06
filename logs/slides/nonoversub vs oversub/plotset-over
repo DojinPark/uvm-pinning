@@ -1,0 +1,93 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+import matplotlib.patches as mpatches
+from adjustText import adjust_text
+import numpy as np
+import csv
+import sys
+from pathlib import Path
+
+def read_data(filename):
+	memsize = 0
+	x = []	# data size
+	y = []	# non-oversubsciption time
+	y1 = []	# oversubscription time
+	z1 = []	# oversubscription speedup
+	
+	file = open(filename, 'r')
+	table = csv.reader(file, delimiter='\t')
+
+	for i, row in enumerate(table):
+		if not row:
+			break
+		x.append( int(row[0]) )
+		base = float(row[2])
+		slow = float(row[3])
+		y.append(base)
+		y1.append(slow)
+		slowdown = slow/base if i >= 9 and slow > base else 0
+		z1.append(slowdown)
+		memsize = int(row[1])
+
+	file.close()
+	return memsize, x, y, y1, z1
+
+
+def plot_extime(ax, x, y, c, offset):
+	w = (x[1] - x[0])/3
+	ax.bar([t + w*offset for t in x], y, w, color=c)
+
+def plot_speedup(ax, x, z, c, offset):
+	w = (x[1] - x[0])/5
+	ax.bar([t + w*offset for t in x], z, w, color=c)
+	# for i, dummy in enumerate(x):
+	# 	ax.annotate(str(round(z[i])), (x[i],3))
+	
+y = [0, 0]
+z = [0, 0]
+
+fig = plt.figure()
+w = 14
+h = 5
+fig.set_size_inches(w, h)
+gs = GridSpec(3, 4, figure=fig)
+legend_colors = ['blue', 'red']
+legend_labels = ['2100MB GPU Memory', '1000MB GPU Memory\n(Oversubscribed)']
+
+for column in range(4,0,-1):
+	memsize, x, y[0], y[1], z[1] = read_data(sys.argv[column])
+	plot_name = sys.argv[column]
+
+	ax2 = fig.add_subplot( gs[2:3, column-1] )
+	ax1 = fig.add_subplot( gs[0:2, column-1] )
+	ax1.set_yscale('log')
+	if column != 1:
+		ax2.set_ylim(0, 800)
+	elif column == 1:
+		ax2.set_ylim(0, 2)
+
+	ax1.title.set_text(plot_name)
+	# ax1.ticklabel_format(axis='y')
+	
+	for i in range(2):
+		plot_extime(ax1, x, y[i], legend_colors[i], offset=i-1)
+	for i in range(1,2):
+		plot_speedup(ax2, x, z[i], legend_colors[i], offset=i-1)
+
+	locs = ax1.get_xticks()
+	locs = [int(loc) for loc in locs]
+	ax2.set_xticklabels(locs)
+	ax1.set_xticklabels([])
+
+fig.text(0.48, 0.018, 'data size (MB)', va='center', rotation='horizontal')
+ax1.set(ylabel='Kernel Time (ms)')
+ax2.set(ylabel='Slowdown (times)')
+patch = []
+for c in legend_colors:
+	patch.append(mpatches.Patch(color=c))
+plt.legend(patch, legend_labels, loc='upper left')
+
+# plt.show()
+plt.savefig('plotset'+str(memsize)+'.png')

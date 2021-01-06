@@ -1,0 +1,76 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+import matplotlib.axes as axes
+import numpy as np
+import csv
+import sys
+
+
+def plot_and_save(time_list, addr_list, count_list, thrashing_list, max_cnt, addr_name, file_name):
+	plt.clf()
+	# Figure size by inches
+	w = 6
+	h = 4.5
+	fig = plt.figure().set_size_inches(w, h)
+	
+	plt.xlabel('Time (ms)')
+	plt.ylabel(addr_name)
+
+	# Eviction Count Colormap Scatter
+	cmap = plt.get_cmap('viridis', max_cnt)
+	plt.scatter(time_list, addr_list, c=count_list, cmap=cmap, marker='o', s=3)
+
+	# Eviction Count Colormap Indicator
+	colorbar = plt.colorbar(label='evictions accumulated max.='+str(max_cnt))
+	ticks = np.arange(max_cnt+1) * (max_cnt-1)/max_cnt + 0.5
+	colorbar.set_ticks(ticks)
+	colorbar.set_ticklabels(np.arange(max_cnt+1))
+
+	# Cyclic Thrashing Detector Indication
+	for time in thrashing_list:
+		plt.axvline(time, 0, 0.8, label='Cyclic Thrashing', color='#8A2BE2')
+
+	plt.savefig(file_name+'.png')
+
+
+max_cnt = 0
+
+time = []
+va = []
+phys = []
+cnt = []
+thrashing = []
+
+i = 0
+
+file_name = sys.argv[1]
+with open(file_name, 'r') as file:
+	data = csv.reader(file, delimiter=',')
+
+	for row in data:
+		i += 1
+
+		if ( row[1] == 'cyclic_thrashing_detected' ):
+			thrashing.append( int(row[0]) )
+			continue
+		elif ( row[1] == 'test' ):
+			continue
+		time.append( int(row[0]) )
+		va.append( int(row[1], 16) )
+		phys.append( int(row[2], 16) )
+		cnt_temp = int(row[3]); cnt.append(cnt_temp); max_cnt = max(max_cnt, cnt_temp)
+
+		if i == 20000:
+			print('Too many list elements. Plotting fist 30000 evictions.')
+			break
+
+	# Shift by  CLOCK_MONOTONIC_RAW offset and convert ns to ms
+	time_offset = time[0]
+	thrashing = [(t - time_offset)/1e6 for t in thrashing]   
+	time = [(t-time_offset)/1e6 for t in time]
+
+print('Max. eviction count:', max_cnt)
+
+plot_and_save(time, va, cnt, thrashing, max_cnt, 'VA Block Address', file_name)
+plot_and_save(time, phys, cnt, thrashing, max_cnt, 'Physical Address', file_name+'-phys')

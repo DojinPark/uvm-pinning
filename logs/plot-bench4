@@ -1,0 +1,104 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+import matplotlib.patches as mpatches
+from adjustText import adjust_text
+import numpy as np
+import csv
+import sys
+from pathlib import Path
+
+def read_data(filename):
+	memsize = 0
+	x = []	# data size
+	y = []	# vanilla execution time
+	y1 = []	# 12.5% pinning execution time
+	y2 = []	# 25% pinning execution time
+	y3 = [] # 50% pinning execution time
+	y4 = [] # shuffle
+	z1 = []	# y1 speedup
+	z2 = []	# y2 speedup
+	z3 = []	# y3 speedup
+	z4 = []	# y4 speedup
+	
+	file = open(filename, 'r')
+	table = csv.reader(file, delimiter='\t')
+	i = 0
+	for row in table:
+		if not row:
+			break
+		if i != 0:
+			x.append( int(row[0]) )
+			y.append( float(row[1]) )
+			y1.append( float(row[2]) )
+			y2.append( float(row[3]) )
+			y3.append( float(row[4]) )
+			y4.append( float(row[5]) )
+			z1.append( round(1 - float(row[2]) / float(row[1]), 4) *100 )
+			z2.append( round(1 - float(row[3]) / float(row[1]), 4) *100 )
+			z3.append( round(1 - float(row[4]) / float(row[1]), 4) *100 )
+			z4.append( round(1 - float(row[5]) / float(row[1]), 4) *100 )
+		else:
+			memsize = int(row[0])
+		i += 1
+	file.close()
+	return memsize, x, y, y1, y2, y3, y4, z1, z2, z3, z4
+
+#def plot_extime(ax, x, y, c):
+#	model = np.poly1d( np.polyfit(x, y, len(x)) )
+#	ax.plot(x, model(x), color=c)
+#	ax.scatter(x, y, color=c)
+
+def plot_extime(ax, x, y, c, offset):
+	w = (x[1] - x[0])/6
+	ax.bar([t + w*offset for t in x], y, w, color=c)
+
+def plot_speedup(ax, x, z, c, offset):
+	w = (x[1] - x[0])/5
+	ax.set_ylim([-40, 60])
+	ax.bar([t + w*offset for t in x], z, w, color=c)
+	
+y = [0, 0, 0, 0, 0]
+z = [0, 0, 0, 0, 0]
+
+fig = plt.figure()
+w = 14
+h = 8
+fig.set_size_inches(w, h)
+gs = GridSpec(7, 4, figure=fig)
+legend_colors = ['black', (0, 0, 1, 0.3), (0, 0, 1, 0.5), (0, 0, 1, 0.7), 'orange']
+legend_labels = ['Baseline', '12.5% pinning', '25% pinning', '50% pinning', 'shuffling']
+
+for row in range(2):
+	for column in range(4,0,-1):
+		memsize, x, y[0], y[1], y[2], y[3], y[4], z[1], z[2], z[3], z[4] = read_data(sys.argv[column + 8*row])
+		plot_name = sys.argv[column+4 + 8*row]
+
+		ax2 = fig.add_subplot( gs[2+4*row:3+4*row, column-1] )
+		ax1 = fig.add_subplot( gs[0+4*row:2+4*row, column-1] )
+
+		ax1.title.set_text(plot_name)
+		ax1.ticklabel_format(axis='y', style='sci', scilimits=(0,3))
+		
+		for i in range(5):
+			plot_extime(ax1, x, y[i], legend_colors[i], offset=i-1)
+		for i in range(1,5):
+			plot_speedup(ax2, x, z[i], legend_colors[i], offset=i-1)
+
+		locs = ax1.get_xticks()
+		locs = [int(loc) for loc in locs]
+		ax2.set_xticklabels(locs)
+		ax1.set_xticklabels([])
+
+fig.text(0.48, 0.035, 'data size (MB)', va='center', rotation='horizontal')
+ax1.set(ylabel='Kernel Execution Time (ms)')
+ax2.set(ylabel='Speed Up (%)')
+patch = []
+for c in legend_colors:
+	patch.append(mpatches.Patch(color=c))
+plt.legend(patch, legend_labels, loc='upper left')
+fig.suptitle(str(memsize)+'MB GPU memory')
+
+# plt.show()
+plt.savefig('plotset'+str(memsize)+'.png')
