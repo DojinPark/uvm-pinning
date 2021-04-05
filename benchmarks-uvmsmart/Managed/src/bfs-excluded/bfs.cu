@@ -21,7 +21,7 @@
 #include <math.h>
 #include <cuda.h>
 
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 //
 
@@ -55,7 +55,7 @@ int main( int argc, char** argv)
 
 void Usage(int argc, char**argv){
 
-//dojin
+//uvm-pinning
 // fprintf(stderr,"Usage: %s <input_file>\n", argv[0]);
 fprintf(stderr,"Usage: %s <input_file> <gpu_free_space_GB> <bool_prefetching>\n", argv[0]);
 //
@@ -68,7 +68,7 @@ void BFSGraph( int argc, char** argv)
 {
 
 	char *input_f;
-	//dojin
+	//uvm-pinning
 	// if(argc!=2){
 	if (argc != 4) {
 	//
@@ -76,7 +76,7 @@ void BFSGraph( int argc, char** argv)
 	exit(0);
 	}
 	
-	//dojin
+	//uvm-pinning
 	bool pref;
 	set_envs(0, 0, 0, argv[2], &pref, argv[3]);
 	//
@@ -243,7 +243,7 @@ while(stop); //if no thread changes this value then the loop stops
 
 	printf("Kernel Executed %d times\n",k);
 
-	//dojin
+	//uvm-pinning
 	//Store the result into a file
 	// FILE *fpo = fopen("result.txt","w");
 	// for(int i=0;i<no_of_nodes;i++)

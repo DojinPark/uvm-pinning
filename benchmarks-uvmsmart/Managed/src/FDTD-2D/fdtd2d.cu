@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <cuda.h>
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 #include <unsupported/Eigen/Polynomials>
 #include <iostream>
@@ -205,7 +205,7 @@ void fdtdCuda(DATA_TYPE* _fict_, DATA_TYPE* ex, DATA_TYPE* ey, DATA_TYPE* hz, si
 	cudaMemcpy(hz_gpu, hz, sizeof(DATA_TYPE) * nx * ny, cudaMemcpyHostToDevice);
 */
 
-	//dojin-note
+	//uvm-pinning-note
 	// block(32, 32)  is the max by compute capability
 	// ny / 32 = max 65535
 	// than max(ny) is 65535*32 = 2097120
@@ -252,7 +252,7 @@ int main(int argc, char ** argv)
 	hz = (DATA_TYPE*)malloc(nx*ny*sizeof(DATA_TYPE));
 */	
 
-	//dojin
+	//uvm-pinning
 	size_t n;
 	unsigned tmax = 5;  // The number of iterations
 

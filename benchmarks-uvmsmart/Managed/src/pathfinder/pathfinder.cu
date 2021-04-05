@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 //
 
@@ -27,7 +27,7 @@ int pyramid_height;
 void
 init(int argc, char** argv)
 {
-	//dojin
+	//uvm-pinning
     // if(argc==4){
     // 	cols = atoi(argv[1]);
     // 	rows = atoi(argv[2]);

@@ -1,4 +1,4 @@
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 #include <iostream>
 //
@@ -60,7 +60,7 @@ runTest(int argc, char** argv)
     
 	
  
-//dojin
+//uvm-pinning
 	// if (argc == 9)
 	// {
 	// 	rows = atoi(argv[1]);  //number of rows in the domain

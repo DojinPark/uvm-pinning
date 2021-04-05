@@ -17,7 +17,7 @@ void add(int n, float *x, float *y)
  
 int main(int argc, char ** argv)
 {
-  //dojin
+  //uvm-pinning
   // int N = 1<<20;
   size_t N;
   bool pref = false;
@@ -56,7 +56,7 @@ if (pref) {
   // Launch kernel on 1M elements on the GPU
   int blockSize = 256;
   // int numBlocks = (N + blockSize - 1) / blockSize;
-  //dojin
+  //uvm-pinning
   int numBlocks;
   if ( (N + blockSize - 1)/blockSize > CUDA_MAX_BLOCK_DIM ) numBlocks = CUDA_MAX_BLOCK_DIM;
   else numBlocks = (N + blockSize - 1) / blockSize;

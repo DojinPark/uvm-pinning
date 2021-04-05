@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <cuda.h>
 #include <cuda_runtime.h>
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 //
 
@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 {
   //int N = 1<<10;
   float *input, *output, *table;
-  //dojin
+  //uvm-pinning
   size_t N;
   bool pref = false;
   set_envs(&N, sizeof(float), argv[1], argv[2], &pref, argv[3]);

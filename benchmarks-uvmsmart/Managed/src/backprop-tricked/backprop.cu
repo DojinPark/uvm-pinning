@@ -2,7 +2,7 @@
 #include "backprop.h"
 #include "backprop_cuda_kernel.cu"
 
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 #include <string>
 //
@@ -471,7 +471,7 @@ void load(BPNN *net)
 
 int setup(int argc, char *argv[])
 {
-  //dojin
+  //uvm-pinning
   // if (argc!=2){
   // fprintf(stderr, "usage: backprop <num of input elements>\n");
   // exit(0);

@@ -20,7 +20,7 @@ Generate larger input files for Hotspot by expanding smaller versions
 
 // #define OUT_SIZE IN_SIZE*MULTIPLIER
 
-//dojin
+//uvm-pinning
 #include "../../../common/util.h"
 #include <cmath>
 #include <string>
@@ -77,7 +77,7 @@ void expand( char * infName, char * outfName )
 	free( outMatr );
 }
 
-//dojin
+//uvm-pinning
 void build_file_name() {
 	
 }
@@ -85,7 +85,7 @@ void build_file_name() {
 
 int main( int argc, char* argv[] )
 {
-//dojin
+//uvm-pinning
 	size_t n;
 	parse_args(n, argv[1], sizeof(float));
 	n = sqrt(n);

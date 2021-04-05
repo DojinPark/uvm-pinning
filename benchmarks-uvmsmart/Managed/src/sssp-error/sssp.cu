@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <float.h>
 
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 //
 
@@ -266,13 +266,13 @@ void dijkstraGPU(GraphData *graph, const int sourceVertex, float * __restrict__ 
 
     // --- Create mask array Ma, cost array Ca and updating cost array Ua of size V
     // bool    *d_finalizedVertices;           gpuErrchk(cudaMalloc(&d_finalizedVertices,       sizeof(bool)   * graph->numVertices));
-//dojin
+//uvm-pinning
     bool    *finalizedVertices;           gpuErrchk(cudaMallocManaged(&finalizedVertices,       sizeof(bool)   * graph->numVertices));
 //
     //float   *d_shortestDistances;           gpuErrchk(cudaMallocManaged(&d_shortestDistances,       sizeof(float) * graph->numVertices));
     float   *d_updatingShortestDistances;   gpuErrchk(cudaMallocManaged(&d_updatingShortestDistances, sizeof(float) * graph->numVertices));
 
-//dojin
+//uvm-pinning
     // bool *h_finalizedVertices = (bool *)malloc(sizeof(bool) * graph->numVertices);
 //
 
@@ -284,7 +284,7 @@ void dijkstraGPU(GraphData *graph, const int sourceVertex, float * __restrict__ 
     //gpuErrchk(cudaDeviceSynchronize());
 
     // --- Read mask array from device -> host
-//dojin
+//uvm-pinning
     // gpuErrchk(cudaMemcpy(h_finalizedVertices, d_finalizedVertices, sizeof(bool) * graph->numVertices, cudaMemcpyDeviceToHost));
 //
     int iteration = 0;
@@ -306,7 +306,7 @@ void dijkstraGPU(GraphData *graph, const int sourceVertex, float * __restrict__ 
 	    iteration++;
         }
 
-//dojin
+//uvm-pinning
         // gpuErrchk(cudaMemcpy(h_finalizedVertices, d_finalizedVertices, sizeof(bool) * graph->numVertices, cudaMemcpyDeviceToHost));
 //
     }
@@ -317,7 +317,7 @@ void dijkstraGPU(GraphData *graph, const int sourceVertex, float * __restrict__ 
     cudaDeviceSynchronize();
     gpu_timer_pause();
 
-//dojin
+//uvm-pinning
     // free(h_finalizedVertices);
 //
 
@@ -344,7 +344,7 @@ int main(int argc, char ** argv) {
     // --- Source vertex
     int sourceVertex = 0;
     
-//dojin
+//uvm-pinning
     // int numVertices = 1<<20;
     size_t numVertices;
     bool pref;
@@ -402,7 +402,7 @@ int main(int argc, char ** argv) {
     dijkstraGPU(&graph, sourceVertex, h_shortestDistancesGPU);
     gpu_timer_record(argc, argv);
 
-//dojin
+//uvm-pinning
     // FILE *fp;
     // fp = fopen ("output.txt", "w+");
     // fprintf(fp,"\nGPU results\n");

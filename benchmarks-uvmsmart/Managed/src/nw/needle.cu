@@ -10,7 +10,7 @@
 // includes, kernels
 #include "needle_kernel.cu"
 
-//dojin
+//uvm-pinning
 #include "../../common/util.h"
 //
 
@@ -81,7 +81,7 @@ void runTest( int argc, char** argv)
 	int *itemsets,  *referrence;
 	int size;
 	
-	//dojin
+	//uvm-pinning
     // 	// the lengths of the two sequences should be able to divided by 16.
 	// // And at current stage  max_rows needs to equal max_cols
 	// if (argc == 3)
