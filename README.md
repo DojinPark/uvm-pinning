@@ -7,7 +7,7 @@ However, [*Unified Memory*](https://www.nextplatform.com/2019/01/24/unified-memo
 It is found on this study, that this completely inefficient page replacement occurs on non-streaming type applications and defined it as *cyclic thrashing*.
 *UVM-Pinning* detects cyclic thrashing under *Unified Memory*, and pins pages on GPU memory for later reuse, reducing runtime by 55% in best case experiment.
 
-Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
+Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](//uvm-pinningPark_CASES2020.pdf) for more details.
 
 ---
 
@@ -40,6 +40,6 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Meta
 
-Dojin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
+DOjin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
 
 Distributed under the GNU GPLv2 license. See ``LICENSE`` for more information.
