@@ -20,17 +20,17 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
 - Python 3
 - CUDA Toolkit & NVIDIA Driver (must be paired versions)
 
-Download linux runfile installer of a version of your preference
+Download linux runfile installer at https://developer.nvidia.com/cuda-downloads
 
-at https://developer.nvidia.com/cuda-downloads
+Than extract driver source by following commands below.
 
-Than extract driver source by following commands below
+(Edit filenames for your desired version of CUDA Toolkit.)
 
 ```sh
 cd ~
-wget https://developer.download.nvidia.com/compute/cuda/{XX.XX.XX}/local_installers/cuda_{XX.XX.XX}_linux.run
-sudo sh cuda_{XX.XX.XX}_linux.run --extract=~/toolkit
-sudo ~/toolkit/NVIDIA-Linux-{XX.XX.XX.XX}.run -x # A folder named ~/NVIDIA-Linux-{XX.XX.XX.XX} should be created.
+wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
+sudo sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
+sudo NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
 ```
 
 ## Driver Installation
