@@ -10,7 +10,7 @@ It is found on this study, that this completely inefficient page replacement occ
 
 *UVM-Pinning* detects cyclic thrashing under *Unified Memory*, pins pages on GPU memory for later reuse and reduces runtime by 55% in best case experiment.
 
-Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](//uvm-pinningPark_CASES2020.pdf) for more details.
+Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
 ---
 
@@ -34,26 +34,52 @@ sudo ~/toolkit/NVIDIA-Linux-{XX.XX.XX.XX}.run -x # A folder named ~/NVIDIA-Linux
 ```
 
 ## Driver Installation
-Initial Setup
+Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
 ```sh
 git clone https://github.com/DojinPark/uvm-pinning
 sudo sh uvm-pinning/init.sh
-sh uvm-pinning/copy-source.sh ~/NVIDIA-Linux-{XX.XX.XX.XX}/
+```
+
+Than inject uvm-pinning source to the extracted driver source.
+```
+sh uvm-pinning/inject-source.sh $DRIVER_PATH
 ```
 
 Now, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu)
-
 ```sh
-
+sudo sh $UVM_PINNING_PATH/install.sh
 ```
+
+
 ## Usage
 
+Build benchmarks before running.
 ```sh
+make -f $UVM_PINNING_PATH/benchmarks/Managed/makefile
 ```
 
+To run all benchmarks:
+```sh
+sh $UVM_PINNING_PATH/Managed/bin/run-all.sh
+```
 
-## Meta
+To run all benchmarks with logs:
+```sh
+sh $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
+```
 
-DOjin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
+To run individual benchmark, for example, to run *addvector* with 1.2GB data size under 1GB GPU memory capacity,
+```sh
+./addvector 1228.8 1024
+```
+
+Than to save obtain log text and plot page faults from individual benchmark:
+```sh
+sudo uvm-pinning-plot my_log
+```
+
+## Author
+
+Dojin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
 
 Distributed under the GNU GPLv2 license. See ``LICENSE`` for more information.
