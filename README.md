@@ -58,22 +58,22 @@ Build benchmarks before running.
 make -f $UVM_PINNING_PATH/benchmarks/Managed/makefile
 ```
 
-To run all benchmarks:
+- To run all benchmarks:
 ```sh
 sh $UVM_PINNING_PATH/Managed/bin/run-all.sh
 ```
 
-To run all benchmarks with logs:
+- To run all benchmarks with logs:
 ```sh
 sh $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ```
 
-To run individual benchmark, for example, to run *addvector* with 1.2GB data size under 1GB GPU memory capacity,
+- To try individual benchmark, for example, to run *addvector* with 1.2GB data size under 1GB GPU memory capacity,
 ```sh
 ./addvector 1228.8 1024
 ```
 
-Than to save obtain log text and plot page faults from individual benchmark:
+- Than to save obtain log text and plot page faults from individual benchmark:
 ```sh
 sudo uvm-pinning-plot my_log
 ```
