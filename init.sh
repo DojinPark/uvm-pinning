@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Edit DRIVER_PATH and UVM_PINNING_PATH to your extracted driver path
-export DRIVER_PATH="./NVIDIA-Linux-x86_64-450.51.06"
+export DRIVER_PATH="~/NVIDIA-Linux-x86_64-450.51.06"
 export UVM_PINNING_PATH="~/uvm-pinning/"
 export CUDA_PATH="/usr/local/cuda/"
 export PATH="$CUDA_PATH/bin:$PATH"
