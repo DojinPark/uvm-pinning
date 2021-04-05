@@ -16,6 +16,7 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
 - Linux OS
 - Python 3
 - CUDA Toolkit & NVIDIA Driver (must be paired versions)
+
 Download linux runfile installer of a version of your preference
 at https://developer.nvidia.com/cuda-downloads
 Than extract driver source by following commands below
