@@ -49,7 +49,7 @@ Than inject uvm-pinning source to the extracted driver source.
 sh uvm-pinning/inject-source.sh $DRIVER_PATH
 ```
 
-Now, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu)
+Finally, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu) install the modified driver.
 ```sh
 sudo sh $UVM_PINNING_PATH/install.sh
 ```
