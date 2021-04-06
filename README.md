@@ -12,8 +12,7 @@ It is found on this study, that this completely inefficient page replacement occ
 
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
-![Cyclic Thrashing Detection](/logs/paper/complete/ra1300-pinning25-phys.png)
-![Page Pinning to GPU Memory](/logs/paper/complete/ra1500-pinning25-zoom-phys.png)
+![Cyclic Thrashing Detection](/logs/paper/complete/ra1300-pinning25-phys.png) | ![Page Pinning to GPU Memory](/logs/paper/complete/ra1500-pinning25-zoom-phys.png)
 
 
 
