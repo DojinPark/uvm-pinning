@@ -34,9 +34,13 @@ sudo NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64
 ```
 
 ## Driver Installation
-Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
+
 ```sh
 git clone https://github.com/DojinPark/uvm-pinning
+```
+
+Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
+```sh
 sudo sh uvm-pinning/init.sh
 ```
 
