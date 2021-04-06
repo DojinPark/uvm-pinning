@@ -40,6 +40,7 @@ git clone https://github.com/DojinPark/uvm-pinning
 ```
 
 Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
+It is recommended to add this to your terminal startup script (i.e. ~/.bashrc)
 ```sh
 sudo sh uvm-pinning/init.sh
 ```
