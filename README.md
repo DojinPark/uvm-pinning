@@ -46,17 +46,17 @@ Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
 
 It is recommended to add this to your terminal startup script (i.e. ~/.bashrc)
 ```bash
-sudo sh uvm-pinning/init.sh
+source uvm-pinning/init.sh
 ```
 
 Than inject uvm-pinning source to the extracted driver source.
 ```bash
-sh uvm-pinning/inject-source.sh $DRIVER_PATH
+bash uvm-pinning/inject-source.sh $DRIVER_PATH
 ```
 
 Finally, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu) install the modified driver.
 ```bash
-sudo sh $UVM_PINNING_PATH/install.sh
+sudo bash $UVM_PINNING_PATH/install.sh
 ```
 
 
