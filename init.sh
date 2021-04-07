@@ -11,9 +11,11 @@ export CPP_INCLUDE_PATH="$CPP_INCLUDE_PATH:/usr/local/include/eigen3/"
 
 # Logging utililty function
 export UVM_PINNING_PREFIX='uvm-pinning'
-export $PATH="$PATH:$UVM_PINNING_PATH/logs/"
-function uvm-pinning-log {
-	echo > /dev/null | sudo tee /var/log/kern.log # Cleanse other kernel logs
+export PATH="$PATH:$UVM_PINNING_PATH/logs/"
+function prof-clean {
+	echo > /dev/null | sudo tee /var/log/kern.log # Cleanse kernel logs
+}
+function prof-plot {
 	cp /var/log/kern.log $1
 	sed -i "/.*nvidia-uvm:.*/d" $1
 	sed -i "s/^.*\($UVM_PINNING_PREFIX:\)//g" $1
