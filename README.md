@@ -14,7 +14,7 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
 
 <p float=left align=center>
   <figure>
-    <img src="/logs/paper/complete/ra1300-pinning25-zoom-phys.png" width=40% />
+    <img src="/logs/paper/complete/ra1500-pinning25-zoom-phys.png" width=40% />
     <figcaption>Vertical violet line indicates cyclic thrashing detection.</figcaption>
   </figure>
   <figure>
