@@ -19,7 +19,7 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
   </figure>
   <figure>
     <img src="/logs/paper/complete/fdtd120-phys.png" width=40% />
-    <figcaption>Cavity in the line of pages implies pinnned pages in GPU memory.</figcaption>
+    <figcaption>Cavity implies pinnned pages in GPU memory.</figcaption>
   </figure>
 </p>
 
