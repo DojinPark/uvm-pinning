@@ -13,6 +13,7 @@ It is found on this study, that this completely inefficient page replacement occ
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
 /* Three image containers (use 25% for four, and 50% for two, etc) */
+<style>
 .column {
   float: left;
   width: 50%;
@@ -25,6 +26,7 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
   clear: both;
   display: table;
 }
+</style>
 
 <div class="row">
   <div class="column">
