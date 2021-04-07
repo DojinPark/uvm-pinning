@@ -14,18 +14,18 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
 
 /* Three image containers (use 25% for four, and 50% for two, etc) */
 <style>
-.column {
-  float: left;
-  width: 50%;
-  padding: 5px;
-}
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
 
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+  /* Clear floats after image containers */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 </style>
 
 <div class="row">
