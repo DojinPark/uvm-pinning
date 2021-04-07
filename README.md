@@ -31,7 +31,6 @@ Than extract driver source by following commands below.
 (Edit filenames for your desired version of CUDA Toolkit.)
 
 ```sh
-cd ~
 wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
 sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
 ~/toolkit/NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
