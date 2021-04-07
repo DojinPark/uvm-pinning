@@ -8,9 +8,13 @@ However, [*Unified Memory*](https://www.nextplatform.com/2019/01/24/unified-memo
 
 It is found on this study, that this completely inefficient page replacement occurs on non-streaming type applications and defined it as *cyclic thrashing*.
 
-*UVM-Pinning* detects cyclic thrashing under *Unified Memory*, pins pages on GPU memory for later reuse and reduces runtime by 55% in best case experiment.
+*UVM-Pinning* detects *cyclic thrashing* under *Unified Memory*, pins pages on GPU memory for later reuse and reduces runtime by 55% in best-case experiment.
 
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
+
+![Cyclic Thrashing Detection](/logs/paper/complete/ra1300-pinning25-phys.png) | ![Page Pinning to GPU Memory](/logs/paper/complete/ra1500-pinning25-zoom-phys.png)
+
+
 
 ---
 
@@ -26,55 +30,60 @@ Than extract driver source by following commands below.
 
 (Edit filenames for your desired version of CUDA Toolkit.)
 
-```sh
-cd ~
+```bash
 wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
-sudo sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
-sudo NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
+sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
+~/toolkit/NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
 ```
 
 ## Driver Installation
-Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
-```sh
+
+```bash
 git clone https://github.com/DojinPark/uvm-pinning
-sudo sh uvm-pinning/init.sh
+```
+
+Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
+
+It is recommended to add this to your terminal startup script (i.e. ~/.bashrc)
+```bash
+source uvm-pinning/init.sh
 ```
 
 Than inject uvm-pinning source to the extracted driver source.
-```
-sh uvm-pinning/inject-source.sh $DRIVER_PATH
+```bash
+bash uvm-pinning/inject-source.sh $DRIVER_PATH
 ```
 
-Now, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu)
-```sh
-sudo sh $UVM_PINNING_PATH/install.sh
+Finally, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu) install the modified driver.
+```bash
+sudo bash $UVM_PINNING_PATH/install.sh
 ```
 
 
 ## Usage
 
 Build benchmarks before running.
-```sh
+```bash
 make -f $UVM_PINNING_PATH/benchmarks/Managed/makefile
 ```
 
 - To run all benchmarks:
-```sh
-sh $UVM_PINNING_PATH/Managed/bin/run-all.sh
+```bash
+bash $UVM_PINNING_PATH/Managed/bin/run-all.sh
 ```
 
 - To run all benchmarks with logs:
-```sh
-sh $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
+```bash
+bash $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ```
 
 - To try individual benchmark, for example, to run *addvector* with 1.2GB data size under 1GB GPU memory capacity,
-```sh
+```bash
 ./addvector 1228.8 1024
 ```
 
 - Than to save obtain log text and plot page faults from individual benchmark:
-```sh
+```bash
 sudo uvm-pinning-plot my_log
 ```
 
@@ -82,4 +91,4 @@ sudo uvm-pinning-plot my_log
 
 Dojin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
 
-Distributed under the GNU GPLv2 license. See ``LICENSE`` for more information.
+Distributed under the GNU GPLv2 license.
