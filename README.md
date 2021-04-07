@@ -13,8 +13,8 @@ It is found on this study, that this completely inefficient page replacement occ
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
 <p float="left">
-  <img src="/logs/paper/complete/ra1300-pinning25-phys.png" width="100" />
-  <img src="/logs/paper/complete/fdtd120-phys.png" width="100" /> 
+  <img src="/logs/paper/complete/ra1300-pinning25-phys.png" width=50% />
+  <img src="/logs/paper/complete/fdtd120-phys.png" width=50% /> 
 </p>
 
 
