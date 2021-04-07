@@ -12,31 +12,10 @@ It is found on this study, that this completely inefficient page replacement occ
 
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
-/* Three image containers (use 25% for four, and 50% for two, etc) */
-<style>
-  .column {
-    float: left;
-    width: 50%;
-    padding: 5px;
-  }
-
-  /* Clear floats after image containers */
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-</style>
-
-<div class="row">
-  <div class="column">
-    <img src="/logs/paper/complete/ra1300-pinning25-phys.png" alt="Cyclic Thrashing Detection" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="/logs/paper/complete/fdtd120-phys.png" alt="Page Pinning to GPU Memory" style="width:100%">
-  </div>
-</div>
-
+<p float="left">
+  <img src="/logs/paper/complete/ra1300-pinning25-phys.png" width="100" />
+  <img src="/logs/paper/complete/fdtd120-phys.png" width="100" /> 
+</p>
 
 
 
