@@ -12,14 +12,12 @@ It is found on this study, that this completely inefficient page replacement occ
 
 Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-Progress](DojinPark_CASES2020.pdf) for more details.
 
-<p float=left align=center>
-  <figure>
-    <img src="/logs/paper/complete/ra1500-pinning25-zoom-phys.png" width=40% />
-    <figcaption>Vertical violet line indicates cyclic thrashing detection.</figcaption>
-    <img src="/logs/paper/complete/fdtd120-phys.png" width=40% />
-    <figcaption>Cavity implies pinnned pages in GPU memory.</figcaption>
-  </figure>
-</p>
+<figure>
+  <img src="/logs/paper/complete/ra1500-pinning25-zoom-phys.png" width=40% />
+  <figcaption>Vertical violet line indicates cyclic thrashing detection.</figcaption>
+  <img src="/logs/paper/complete/fdtd120-phys.png" width=40% />
+  <figcaption>Cavity implies pinnned pages in GPU memory.</figcaption>
+</figure>
 
 
 
