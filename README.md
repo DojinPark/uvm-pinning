@@ -15,8 +15,6 @@ Refer to [Page Reuse in Cyclic Thrashing of GPU Under Oversubscription: Work-in-
 <figure style="display:inline-block">
   <img src="/logs/paper/complete/ra1500-pinning25-zoom-phys.png" width=40% />
   <figcaption>Vertical violet line indicates cyclic thrashing detection.</figcaption>
-</figure>
-<figure style="display:inline-block">
   <img src="/logs/paper/complete/fdtd120-phys.png" width=40% />
   <figcaption>Cavity implies pinnned pages in GPU memory.</figcaption>
 </figure>
