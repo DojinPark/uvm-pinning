@@ -30,7 +30,7 @@ Than extract driver source by following commands below.
 
 (Edit filenames for your desired version of CUDA Toolkit.)
 
-```sh
+```bash
 wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
 sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
 ~/toolkit/NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
@@ -38,24 +38,24 @@ sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
 
 ## Driver Installation
 
-```sh
+```bash
 git clone https://github.com/DojinPark/uvm-pinning
 ```
 
 Initial Setup. You MUST edit *init.sh* to your preferred workspace path.
 
 It is recommended to add this to your terminal startup script (i.e. ~/.bashrc)
-```sh
+```bash
 sudo sh uvm-pinning/init.sh
 ```
 
 Than inject uvm-pinning source to the extracted driver source.
-```
+```bash
 sh uvm-pinning/inject-source.sh $DRIVER_PATH
 ```
 
 Finally, under virtual terminal (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F2</kbd> for ubuntu) install the modified driver.
-```sh
+```bash
 sudo sh $UVM_PINNING_PATH/install.sh
 ```
 
@@ -63,27 +63,27 @@ sudo sh $UVM_PINNING_PATH/install.sh
 ## Usage
 
 Build benchmarks before running.
-```sh
+```bash
 make -f $UVM_PINNING_PATH/benchmarks/Managed/makefile
 ```
 
 - To run all benchmarks:
-```sh
-sh $UVM_PINNING_PATH/Managed/bin/run-all.sh
+```bash
+bash $UVM_PINNING_PATH/Managed/bin/run-all.sh
 ```
 
 - To run all benchmarks with logs:
-```sh
-sh $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
+```bash
+bash $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ```
 
 - To try individual benchmark, for example, to run *addvector* with 1.2GB data size under 1GB GPU memory capacity,
-```sh
+```bash
 ./addvector 1228.8 1024
 ```
 
 - Than to save obtain log text and plot page faults from individual benchmark:
-```sh
+```bash
 sudo uvm-pinning-plot my_log
 ```
 
