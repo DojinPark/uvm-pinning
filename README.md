@@ -91,4 +91,4 @@ sudo uvm-pinning-plot my_log
 
 Dojin Park – [@github](https://github.com/DojinPark) – djpark@arcs.skku.edu
 
-Distributed under the GNU GPLv2 license. See ``LICENSE`` for more information.
+Distributed under the GNU GPLv2 license.
