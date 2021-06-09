@@ -42,7 +42,7 @@ sh cuda_11.2.2_460.32.03_linux.run --extract=~/toolkit
 ~/toolkit/NVIDIA-Linux-x86_64-460.32.03.run -x    # A directory ~/NVIDIA-Linux-x86_64-460.32.03/ should be created.
 ```
 
-## Driver Installation
+## Installing the Nvidia Driver
 
 ```bash
 git clone https://github.com/DojinPark/uvm-pinning
