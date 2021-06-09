@@ -88,9 +88,9 @@ bash $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ./addvector 1228.8 1024
 ```
 
-- Than to save obtain log text and plot page faults from individual benchmark:
+- Than to obtain log text and plot page faults from individual benchmark:
 ```bash
-sudo uvm-pinning-plot my_log
+sudo uvm-pinning-plot my_log.txt
 ```
 
 ## Author
