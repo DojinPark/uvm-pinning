@@ -73,12 +73,13 @@ Build benchmarks before running.
 make -f $UVM_PINNING_PATH/benchmarks/Managed/makefile
 ```
 
-- To run all benchmarks:
+
+- To run all benchmarks,
 ```bash
 bash $UVM_PINNING_PATH/Managed/bin/run-all.sh
 ```
 
-- To run all benchmarks with logs:
+- To run all benchmarks with logs,
 ```bash
 bash $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ```
@@ -88,7 +89,7 @@ bash $UVM_PINNING_PATH/Managed/bin/run-all-logs.sh
 ./addvector 1228.8 1024
 ```
 
-- Than to obtain log text and plot page faults from individual benchmark:
+- Than to obtain log text and plot page faults from individual benchmark,
 ```bash
 sudo uvm-pinning-plot my_log.txt
 ```
