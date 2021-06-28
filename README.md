@@ -1,5 +1,5 @@
-## 네이버 면접 포트폴리오 추가 내용이 있습니다.
-*React-Native를 이용한 개인 프로젝트*
+### 네이버 면접 포트폴리오 추가 내용이 있습니다.
+#### React-Native를 이용하여 진행중인 개인 프로젝트
 
 @github https://github.com/DojinPark/DuckProject
 
